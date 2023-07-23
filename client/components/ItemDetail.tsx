@@ -17,21 +17,20 @@ const ItemDetail: React.FC<Props> = ({ itemId }) => {
   const [item, setItem] = useState<Item | null>(null);
 
   useEffect(() => {
-    // Mock fetch call to the backend to get the details of a specific item
-    // In a real application, this would be a call to your backend API
-    const mockFetchItemDetail = async () => {
-      const mockData: Item = {
-        id: 1,
-        name: 'Plastic Bottle',
-        category: 'Plastic',
-        description: 'A common household item used for storing liquids.',
-        recyclingProtocol: 'Rinse and clean the bottle. Remove the cap and place it in the recycling bin.'
-      };
-      // For simplicity, we are returning the same mockData for any itemId
-      setItem(mockData);
+
+
+    const fetchItemDetail = async () => {
+      const response = await fetch('http://localhost:3000/items/' + itemId);
+      if (response.ok) {
+        const data = await response.json();
+        setItem(data.item);
+      } else {
+        console.error('Failed to fetch item details');
+      }
+
     };
 
-    mockFetchItemDetail();
+    fetchItemDetail();
   }, [itemId]);
 
   return (

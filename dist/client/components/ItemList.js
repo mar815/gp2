@@ -39,21 +39,27 @@ import '../styles/ItemList.scss';
 var ItemList = function () {
     var _a = useState([]), items = _a[0], setItems = _a[1];
     useEffect(function () {
-        // Mock fetch call to the backend to get the list of items
-        // In a real application, this would be a call to your backend API
-        var mockFetchItems = function () { return __awaiter(void 0, void 0, void 0, function () {
-            var mockData;
+        var fetchItems = function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response, data;
             return __generator(this, function (_a) {
-                mockData = [
-                    { id: 1, name: 'Plastic Bottle', category: 'Plastic' },
-                    { id: 2, name: 'Glass Jar', category: 'Glass' },
-                    { id: 3, name: 'Newspaper', category: 'Paper' }
-                ];
-                setItems(mockData);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch('http://localhost:3000/items')];
+                    case 1:
+                        response = _a.sent();
+                        if (!response.ok) return [3 /*break*/, 3];
+                        return [4 /*yield*/, response.json()];
+                    case 2:
+                        data = _a.sent();
+                        setItems(data.items);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        console.error('Failed to fetch items list');
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
+                }
             });
         }); };
-        mockFetchItems();
+        fetchItems();
     }, []);
     return (React.createElement("div", { className: "item-list" },
         React.createElement("h2", null, "Recycling Catalogue"),

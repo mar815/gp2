@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -6,6 +7,8 @@ import ItemRoutes from './routes/itemRoutes';
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const app = express();
+app.use(cors()); // Enable CORS for all routes
+
 const port = process.env.PORT || 3000;
 
 app.use(express.json()); // Body parsing

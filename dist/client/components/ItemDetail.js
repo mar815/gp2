@@ -40,24 +40,27 @@ var ItemDetail = function (_a) {
     var itemId = _a.itemId;
     var _b = useState(null), item = _b[0], setItem = _b[1];
     useEffect(function () {
-        // Mock fetch call to the backend to get the details of a specific item
-        // In a real application, this would be a call to your backend API
-        var mockFetchItemDetail = function () { return __awaiter(void 0, void 0, void 0, function () {
-            var mockData;
+        var fetchItemDetail = function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response, data;
             return __generator(this, function (_a) {
-                mockData = {
-                    id: 1,
-                    name: 'Plastic Bottle',
-                    category: 'Plastic',
-                    description: 'A common household item used for storing liquids.',
-                    recyclingProtocol: 'Rinse and clean the bottle. Remove the cap and place it in the recycling bin.'
-                };
-                // For simplicity, we are returning the same mockData for any itemId
-                setItem(mockData);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch('http://localhost:3000/items/' + itemId)];
+                    case 1:
+                        response = _a.sent();
+                        if (!response.ok) return [3 /*break*/, 3];
+                        return [4 /*yield*/, response.json()];
+                    case 2:
+                        data = _a.sent();
+                        setItem(data.item);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        console.error('Failed to fetch item details');
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
+                }
             });
         }); };
-        mockFetchItemDetail();
+        fetchItemDetail();
     }, [itemId]);
     return (React.createElement("div", { className: "item-detail" }, item && (React.createElement(React.Fragment, null,
         React.createElement("h2", null, item.name),

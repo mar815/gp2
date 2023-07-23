@@ -11,18 +11,20 @@ const ItemList: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
-    // Mock fetch call to the backend to get the list of items
-    // In a real application, this would be a call to your backend API
-    const mockFetchItems = async () => {
-      const mockData: Item[] = [
-        { id: 1, name: 'Plastic Bottle', category: 'Plastic' },
-        { id: 2, name: 'Glass Jar', category: 'Glass' },
-        { id: 3, name: 'Newspaper', category: 'Paper' }
-      ];
-      setItems(mockData);
+
+
+    const fetchItems = async () => {
+      const response = await fetch('http://localhost:3000/items');
+      if (response.ok) {
+        const data = await response.json();
+        setItems(data.items);
+      } else {
+        console.error('Failed to fetch items list');
+      }
+
     };
 
-    mockFetchItems();
+    fetchItems();
   }, []);
 
   return (
