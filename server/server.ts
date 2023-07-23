@@ -8,13 +8,16 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const app = express();
 
-app.use(
-  cors({
-    origin: 'http://localhost:9000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  })
-);
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:9000');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
+
 // Enable CORS for all routes
 
 const port = process.env.PORT || 3000;

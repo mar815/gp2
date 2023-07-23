@@ -50,5 +50,6 @@
     "sass-loader": "^13.3.2",
     "sequelize-typescript": "^2.1.5",
     "ts-loader": "^9.4.4"
-  }
+  },
+  "proxy": "http://localhost:3000"
 }
