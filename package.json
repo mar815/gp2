@@ -4,9 +4,10 @@
   "description": "An application for educating users on the recycling of common and uncommon household items",
   "main": "build/server.js",
   "scripts": {
-    "start": "npm run build && node build/server.js",
-    "build": "tsc",
-    "dev": "concurrently \"tsc -w\" \"nodemon build/server.js\""
+    "start": "npm run build && concurrently \"node build/server.js\" \"webpack-dev-server --mode production\"",
+    "build": "tsc && webpack --mode production",
+    "dev": "concurrently \"tsc -w\" \"nodemon build/server.js\" \"webpack-dev-server --mode development\"",
+    "start-client": "webpack-dev-server --open --mode development"
   },
   "keywords": [
     "recycling",
