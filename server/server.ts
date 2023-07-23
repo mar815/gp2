@@ -7,7 +7,15 @@ import ItemRoutes from './routes/itemRoutes';
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const app = express();
-app.use(cors()); // Enable CORS for all routes
+
+app.use(
+  cors({
+    origin: 'http://localhost:9000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  })
+);
+// Enable CORS for all routes
 
 const port = process.env.PORT || 3000;
 
