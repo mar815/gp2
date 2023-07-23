@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React, { useState, useEffect } from 'react';
+import '../styles/ItemDetail.scss';
 var ItemDetail = function (_a) {
     var itemId = _a.itemId;
     var _b = useState(null), item = _b[0], setItem = _b[1];

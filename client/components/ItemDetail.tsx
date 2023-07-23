@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/ItemDetail.scss'
 
 interface Item {
   id: number;

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/HomePage.scss';
 var HomePage = function () {
     return (React.createElement("div", { className: "home-page" },
         React.createElement("h1", null, "Welcome to Green Planet"),
